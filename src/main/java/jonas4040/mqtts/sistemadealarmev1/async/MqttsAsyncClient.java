@@ -21,6 +21,7 @@ import java.security.KeyStore;
 import java.security.Security;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -35,6 +36,11 @@ public class MqttsAsyncClient {
 	private MqttsReceive mqttsReceive;
 
 	private IMqttAsyncClient mqttsClient;
+
+	private static void messageArrived(String topic1, MqttMessage mqttMessage) {
+		System.out.println("Client Subscribed");
+
+	}
 
 	public IMqttAsyncClient getmqttsClient() {
 		return mqttsClient;
@@ -112,16 +118,8 @@ public class MqttsAsyncClient {
 	 * @param topic
 	 * @param qos
 	 */
-	//TODO mudar mensagem de subscribe padrao
-	public String subscribe(String topic, Integer qos){
-		log.info("Fazendo subscribing no topico" + topic);
-		String[] mensagem={""};
-		try {
-			IMqttToken clientSubscribed = this.getmqttsClient().subscribe(topic, qos, (topic1, mqttMessage) -> {
-				System.out.println("Client Subscribed");
-				mensagem[0] = new String(mqttMessage.getPayload());
-				//TODO colocar isso no service
-				//				String msgEsp32 = mqttMessage.toString().replace("{\"Contando\":\"", "").replace("\"}", "");
+	//TODO colocar isso no service
+	//				String msgEsp32 = mqttMessage.toString().replace("{\"Contando\":\"", "").replace("\"}", "");
 //				if(!msgEsp32.equals(content) && Integer.TYPE.isInstance(msgEsp32)){
 //						if (Integer.parseInt(msgEsp32) % 10 >= 6) {
 //							System.out.println("Publishing message: " + content);
@@ -133,10 +131,12 @@ public class MqttsAsyncClient {
 //					}else{
 //						msgEsp32="0";
 //					}
-			});
+	public void subscribe(String topic, Integer qos){
+		log.info("Fazendo subscribing no topico " + topic);
+
+		try {
+			this.getmqttsClient().subscribe(topic, qos);
 			//clientSubscribed.waitForCompletion();
-			MqttMessage mqttMessage = new MqttMessage();
-			mqttMessage.setId(clientSubscribed.getMessageId());
 
 		}catch (MqttException me) {
 			log.error("reason " + me.getReasonCode());
@@ -148,7 +148,6 @@ public class MqttsAsyncClient {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return mensagem[0];
 	}
 
 	/**

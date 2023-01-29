@@ -21,6 +21,8 @@ public class MqttsReceive implements MqttCallback {
     private MqttsConfig mqttsConfig;
 
     private static IMqttAsyncClient mqttsClient;
+    public static String msgRecebida;
+
     @Override
     public void connectionLost(Throwable throwable) {
         log.info("Desconectado, pode ser reconectado");
@@ -31,7 +33,8 @@ public class MqttsReceive implements MqttCallback {
 
     @Override
     public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-        log.info("Mensagem "+new String(mqttMessage.getPayload())+" de QoS "+mqttMessage.getQos()+" foi recebida");
+        System.out.println("Mensagem "+new String(mqttMessage.getPayload())+" de QoS "+mqttMessage.getQos()+" foi recebida");
+        msgRecebida = new String(mqttMessage.getPayload());
     }
 
     @Override

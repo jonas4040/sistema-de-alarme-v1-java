@@ -1,6 +1,7 @@
 package jonas4040.mqtts.sistemadealarmev1.service;
 
 import jonas4040.mqtts.sistemadealarmev1.async.MqttsAsyncClient;
+import jonas4040.mqtts.sistemadealarmev1.async.MqttsReceive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,8 @@ public class AlarmeService {
     private MqttsAsyncClient mqttsAsyncClient;
 
     public String subscrever(String topico, Integer qos){
-        return mqttsAsyncClient.subscribe(topico,qos);
+        mqttsAsyncClient.subscribe(topico,qos);
+        return MqttsReceive.msgRecebida;
     }
 
     /**
