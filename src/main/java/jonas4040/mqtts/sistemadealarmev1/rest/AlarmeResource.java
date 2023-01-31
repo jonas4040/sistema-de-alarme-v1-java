@@ -5,11 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v1/alarme")
 public class AlarmeResource {
@@ -17,13 +15,14 @@ public class AlarmeResource {
     private AlarmeService alarmeService;
 
     @GetMapping("/temperatura")
-    public String getTemperatura(){
-       return alarmeService.subscrever("camara/", 1);
+    public ResponseEntity<String> getTemperatura(){
+        return new ResponseEntity<>(alarmeService.subscrever("camara/", 1), HttpStatus.OK) ;
     }
 
     //TODO mudo ou nao para POST?
     @GetMapping("/reset")
-    public void resetar(){
+    public ResponseEntity<String> resetar(){
         alarmeService.resetarAlarme();
+        return new ResponseEntity ("Alarme resetado com sucesso!",HttpStatus.OK);
     }
 }
