@@ -19,10 +19,9 @@ public class AlarmeResource {
         return new ResponseEntity<>(alarmeService.subscrever("camara/", 1), HttpStatus.OK) ;
     }
 
-    //TODO mudo ou nao para POST?
     @GetMapping("/reset")
     public ResponseEntity<String> resetar(){
         alarmeService.resetarAlarme();
-        return new ResponseEntity ("Alarme resetado com sucesso!",HttpStatus.OK);
+        return new ResponseEntity ("{\"situacao\":\"Alarme resetado com sucesso!\"}",HttpStatus.OK);
     }
 }

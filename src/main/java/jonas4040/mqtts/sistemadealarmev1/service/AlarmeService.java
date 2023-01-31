@@ -21,7 +21,7 @@ public class AlarmeService {
     public void resetarAlarme(){
         //TODO JSON
         String estadoAlarme = "{" +
-                "\"ligado: \""+
+                "\"ligado\":"+
                 "\"false\""+
                 "}";
         mqttsAsyncClient.publish(1,false,"camara/",estadoAlarme);

@@ -118,19 +118,6 @@ public class MqttsAsyncClient {
 	 * @param topic
 	 * @param qos
 	 */
-	//TODO colocar isso no service
-	//				String msgEsp32 = mqttMessage.toString().replace("{\"Contando\":\"", "").replace("\"}", "");
-//				if(!msgEsp32.equals(content) && Integer.TYPE.isInstance(msgEsp32)){
-//						if (Integer.parseInt(msgEsp32) % 10 >= 6) {
-//							System.out.println("Publishing message: " + content);
-//							MqttMessage message = new MqttMessage(content.getBytes());
-//							message.setQos(qos);
-//							mqttsClient.publish(topic, message);
-//							System.out.println("Message published");
-//						}
-//					}else{
-//						msgEsp32="0";
-//					}
 	public void subscribe(String topic, Integer qos){
 		log.info("Fazendo subscribing no topico " + topic);
 
