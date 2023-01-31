@@ -24,7 +24,7 @@ public class AlarmeService {
                 "\"ligado\":"+
                 "\"false\""+
                 "}";
-        mqttsAsyncClient.publish(1,false,"camara/",estadoAlarme);
+        mqttsAsyncClient.publish(1,false,"casa/temperatura/#",estadoAlarme);
     }
 
     //TODO implementar
