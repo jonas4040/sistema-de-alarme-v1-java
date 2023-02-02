@@ -29,11 +29,9 @@ public class AlarmeService {
      */
     public void resetarAlarme() {
         //TODO JSON
-        String estadoAlarme = "{" +"\"ligado\":"+"\"false\""+"}";
-        Gson gson = new Gson();
-        JsonElement jsonElement = gson.fromJson(estadoAlarme,JsonElement.class);
-        JsonObject json = jsonElement.getAsJsonObject();
-        mqttsAsyncClient.publish(1,false,"casa/janela/",json.toString());
+        JsonObject json = new JsonObject();
+        json.addProperty("ligado",false);
+        mqttsAsyncClient.publish(1,false,"casa/janela",json.toString());
     }
 
     //TODO implementar

@@ -147,11 +147,10 @@ public class MqttsAsyncClient {
 	 * @return
 	 */
 	public void publish(int qos, Boolean retained, String topic, String msg){
-		MqttMessage message = new MqttMessage();
+		MqttMessage message = new MqttMessage(msg.getBytes());
 		message.setQos(qos);
 		message.setRetained(retained);
 		//message.setPayload(msg.getBytes(StandardCharsets.UTF_8));
-		message.setPayload(msg.getBytes());
 
 
 		IMqttDeliveryToken token;
