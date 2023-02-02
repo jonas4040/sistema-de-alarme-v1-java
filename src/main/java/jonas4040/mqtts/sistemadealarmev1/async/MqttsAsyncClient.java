@@ -17,6 +17,7 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
 import java.security.Security;
 import java.security.cert.CertificateFactory;
@@ -149,7 +150,9 @@ public class MqttsAsyncClient {
 		MqttMessage message = new MqttMessage();
 		message.setQos(qos);
 		message.setRetained(retained);
+		//message.setPayload(msg.getBytes(StandardCharsets.UTF_8));
 		message.setPayload(msg.getBytes());
+
 
 		IMqttDeliveryToken token;
 
