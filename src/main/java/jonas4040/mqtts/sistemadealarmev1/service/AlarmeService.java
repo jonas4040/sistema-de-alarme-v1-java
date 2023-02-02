@@ -1,9 +1,18 @@
 package jonas4040.mqtts.sistemadealarmev1.service;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import jonas4040.mqtts.sistemadealarmev1.async.MqttsAsyncClient;
 import jonas4040.mqtts.sistemadealarmev1.async.MqttsReceive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CoderResult;
 
 @Service
 public class AlarmeService {
@@ -18,13 +27,13 @@ public class AlarmeService {
     /**
      * Publica num topico padrao e reseta o alarme
      */
-    public void resetarAlarme(){
+    public void resetarAlarme() {
         //TODO JSON
-        String estadoAlarme = "{" +
-                "\"ligado\":"+
-                "\"false\""+
-                "}";
-        mqttsAsyncClient.publish(1,false,"casa/janela/#",estadoAlarme);
+        String estadoAlarme = "{" +"\"ligado\":"+"\"false\""+"}";
+        Gson gson = new Gson();
+        JsonElement jsonElement = gson.fromJson(estadoAlarme,JsonElement.class);
+        JsonObject json = jsonElement.getAsJsonObject();
+        mqttsAsyncClient.publish(1,false,"casa/janela/",json.toString());
     }
 
     //TODO implementar
