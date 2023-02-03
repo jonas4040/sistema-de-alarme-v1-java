@@ -66,10 +66,6 @@ public class MqttsAsyncClient {
 	 */
 	public void conectar(String brokerURL,String clientID, String username, String password) {
 		String caCertFile = "ca.crt";
-
-//		String topic = "camara/";
-//		String content = "Teste Java";
-//		int qos = 1;
 		MemoryPersistence persistence = new MemoryPersistence();
 
 		try

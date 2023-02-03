@@ -31,7 +31,10 @@ public class AlarmeService {
         //TODO JSON
         JsonObject json = new JsonObject();
         json.addProperty("ligado",false);
-        mqttsAsyncClient.publish(1,false,"casa/janela",json.toString());
+        mqttsAsyncClient.publish(1,false,"casa/quarto1/",json.toString());
+
+        json.addProperty("ligado",true);
+        //TODO subscribe pro topico casa/quarto1/janela
     }
 
     //TODO implementar
