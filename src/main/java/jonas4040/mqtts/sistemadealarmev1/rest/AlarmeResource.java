@@ -16,7 +16,12 @@ public class AlarmeResource {
 
     @GetMapping("/temperatura")
     public ResponseEntity<String> getTemperatura(){
-        return new ResponseEntity<>(alarmeService.subscrever("casa/quarto1/#", 1), HttpStatus.OK) ;
+        return new ResponseEntity<>(alarmeService.subscrever("casa/quarto1/temperatura", 1), HttpStatus.OK);
+    }
+
+    @GetMapping("/alarme")
+    public ResponseEntity<String> getEstadoAlarme(){
+        return new ResponseEntity<>(alarmeService.subscrever("casa/quarto1/alarme", 1), HttpStatus.OK);
     }
 
     @GetMapping("/reset")
