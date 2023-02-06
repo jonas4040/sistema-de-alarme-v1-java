@@ -32,8 +32,8 @@ public class AlarmeService {
         json.addProperty("ligado",false);
         mqttsAsyncClient.publish(1,false,"casa/quarto1/alarme",json.toString());
 
-        json.addProperty("ligado",true);
-        mqttsAsyncClient.publish(1,false,"casa/quarto1/alarme",json.toString());
+        //json.addProperty("ligado",true);
+        //mqttsAsyncClient.publish(1,false,"casa/quarto1/alarme",json.toString());
     }
 
     //TODO implementar
